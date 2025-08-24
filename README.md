@@ -6,7 +6,7 @@ A comprehensive cloud-based laboratory management system designed for multi-camp
 
 - **Multi-Campus Support**: Manage labs across different campuses
 - **Inventory Management**: Track equipment, consumables, and maintenance
-- **Booking System**: Reserve labs and equipment with conflict resolution
+- **Booking System**: Reserve labs, spaces and equipment with conflict resolution
 - **Budget Tracking**: Monitor expenses, allocations, and cost analysis
 - **User Management**: Role-based access control (Admin, Lab Manager, Faculty, Student)
 - **Reporting & Analytics**: Comprehensive dashboards and reports
