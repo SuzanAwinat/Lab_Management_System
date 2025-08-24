@@ -1,0 +1,38 @@
+{
+  "name": "cloud-lab-management-system",
+  "version": "1.0.0",
+  "description": "Comprehensive cloud-based laboratory management system for multi-campus institutions",
+  "main": "index.js",
+  "scripts": {
+    "dev": "concurrently \"npm run backend:dev\" \"npm run frontend:dev\"",
+    "backend:dev": "cd backend && npm run dev",
+    "frontend:dev": "cd frontend && npm start",
+    "install:all": "npm install && cd backend && npm install && cd ../frontend && npm install",
+    "build": "cd frontend && npm run build",
+    "test": "npm run test:backend && npm run test:frontend",
+    "test:backend": "cd backend && npm test",
+    "test:frontend": "cd frontend && npm test",
+    "docker:build": "docker-compose build",
+    "docker:up": "docker-compose up -d",
+    "docker:down": "docker-compose down",
+    "setup:db": "cd database && npm run migrate && npm run seed"
+  },
+  "keywords": [
+    "lab-management",
+    "inventory",
+    "booking",
+    "budget",
+    "multi-campus",
+    "cloud",
+    "education"
+  ],
+  "author": "CLMS Team",
+  "license": "MIT",
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=8.0.0"
+  }
+}
