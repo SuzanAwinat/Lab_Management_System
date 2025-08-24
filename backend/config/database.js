@@ -1,9 +1,10 @@
 const { Sequelize } = require('sequelize');
+const Redis = require('redis');
 const dotenv = require('dotenv');
 
 dotenv.config();
 
-// Database configuration
+// PostgreSQL configuration
 const sequelize = new Sequelize(
   process.env.DB_NAME || 'clms_db',
   process.env.DB_USER || 'postgres',
@@ -14,23 +15,24 @@ const sequelize = new Sequelize(
     dialect: 'postgres',
     logging: process.env.NODE_ENV === 'development' ? console.log : false,
     pool: {
-      max: 10,
+      max: 20,
       min: 0,
       acquire: 30000,
       idle: 10000
     },
-    define: {
-      timestamps: true,
-      underscored: true,
-      freezeTableName: true
+    dialectOptions: {
+      ssl: process.env.NODE_ENV === 'production' ? {
+        require: true,
+        rejectUnauthorized: false
+      } : false
     }
   }
 );
 
 // Redis configuration
-const redis = require('redis');
-const redisClient = redis.createClient({
-  url: process.env.REDIS_URL || 'redis://localhost:6379'
+const redisClient = Redis.createClient({
+  url: process.env.REDIS_URL || 'redis://localhost:6379',
+  password: process.env.REDIS_PASSWORD || null
 });
 
 redisClient.on('error', (err) => {
@@ -41,16 +43,56 @@ redisClient.on('connect', () => {
   console.log('Redis Client Connected');
 });
 
-// Connect to Redis
-(async () => {
+// Test database connection
+const testConnection = async () => {
+  try {
+    await sequelize.authenticate();
+    console.log('Database connection has been established successfully.');
+  } catch (error) {
+    console.error('Unable to connect to the database:', error);
+  }
+};
+
+// Initialize Redis connection
+const initRedis = async () => {
   try {
     await redisClient.connect();
+    console.log('Redis connection established successfully.');
   } catch (error) {
-    console.error('Failed to connect to Redis:', error);
+    console.error('Redis connection failed:', error);
   }
-})();
+};
+
+// Export models
+const User = require('../models/User');
+const Campus = require('../models/Campus');
+const Lab = require('../models/Lab');
+const Equipment = require('../models/Equipment');
+const Inventory = require('../models/Inventory');
+const Booking = require('../models/Booking');
+const Budget = require('../models/Budget');
+
+// Define associations
+User.associate({ Campus, Lab, Equipment, Inventory, Booking, Budget });
+Campus.associate({ User, Lab, Equipment, Inventory, Booking, Budget });
+Lab.associate({ User, Campus, Equipment, Inventory, Booking, Budget });
+Equipment.associate({ User, Campus, Lab, Inventory, Booking, Budget });
+Inventory.associate({ User, Campus, Lab, Equipment, Booking, Budget });
+Booking.associate({ User, Campus, Lab, Equipment, Inventory, Budget });
+Budget.associate({ User, Campus, Lab, Equipment, Inventory, Booking });
 
 module.exports = {
   sequelize,
-  redisClient
+  redisClient,
+  testConnection,
+  initRedis,
+  models: {
+    User,
+    Campus,
+    Lab,
+    Equipment,
+    Inventory,
+    Booking,
+    Budget
+  }
 };
