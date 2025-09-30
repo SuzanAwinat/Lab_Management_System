@@ -1,3 +1,31 @@
+SciTech Labs Management GUI (Flask)
+
+Quick start
+
+1) Optional: create and activate a virtual environment
+   python3 -m venv .venv && source .venv/bin/activate
+
+2) Install dependencies
+   pip install -r requirements.txt
+
+3) Run the app
+   python app.py
+
+4) Open http://127.0.0.1:5000/
+
+Project structure
+- app.py: Entrypoint
+- labms/: Flask package
+  - __init__.py: App factory and blueprint registration
+  - routes.py: Routes and in-memory seed data
+  - templates/: Jinja2 templates
+  - static/: CSS/JS assets
+
+Next steps
+- Wire CRUD forms and validation
+- Add persistence (SQLite/PostgreSQL) with ORM
+- Authentication/authorization (roles: Admin, Faculty, Technician, Student)
+- Audit logs and exportable reports
 # Cloud Lab Management System (CLMS)
 
 A comprehensive cloud-based laboratory management system designed for multi-campus educational institutions, featuring inventory management, booking systems, and budget tracking capabilities.

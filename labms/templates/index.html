@@ -1,0 +1,101 @@
+{% extends 'base.html' %}
+
+{% block title %}Dashboard - SciTech Labs{% endblock %}
+
+{% block content %}
+<div class="row g-3">
+  <div class="col-12 col-sm-6 col-lg-3">
+    <div class="card shadow-sm">
+      <div class="card-body">
+        <h5 class="card-title">Labs</h5>
+        <p class="display-6 mb-0">{{ stats.labs }}</p>
+      </div>
+    </div>
+  </div>
+  <div class="col-12 col-sm-6 col-lg-3">
+    <div class="card shadow-sm">
+      <div class="card-body">
+        <h5 class="card-title">Equipment</h5>
+        <p class="display-6 mb-0">{{ stats.equipment }}</p>
+      </div>
+    </div>
+  </div>
+  <div class="col-12 col-sm-6 col-lg-3">
+    <div class="card shadow-sm">
+      <div class="card-body">
+        <h5 class="card-title">Bookings</h5>
+        <p class="display-6 mb-0">{{ stats.bookings }}</p>
+      </div>
+    </div>
+  </div>
+  <div class="col-12 col-sm-6 col-lg-3">
+    <div class="card shadow-sm">
+      <div class="card-body">
+        <h5 class="card-title">Users</h5>
+        <p class="display-6 mb-0">{{ stats.users }}</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="mt-4">
+  <div class="row g-3">
+    <div class="col-lg-6">
+      <div class="card h-100">
+        <div class="card-header">Upcoming Bookings</div>
+        <div class="card-body p-0">
+          <table class="table mb-0">
+            <thead>
+              <tr>
+                <th scope="col">Lab</th>
+                <th scope="col">Date</th>
+                <th scope="col">Time</th>
+                <th scope="col">By</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for b in bookings %}
+              <tr>
+                <td>{{ b.lab }}</td>
+                <td>{{ b.date }}</td>
+                <td>{{ b.time }}</td>
+                <td>{{ b.by }}</td>
+              </tr>
+              {% else %}
+              <tr><td colspan="4" class="text-center text-muted">No bookings</td></tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-6">
+      <div class="card h-100">
+        <div class="card-header">Maintenance</div>
+        <div class="card-body p-0">
+          <table class="table mb-0">
+            <thead>
+              <tr>
+                <th scope="col">Equipment</th>
+                <th scope="col">Issue</th>
+                <th scope="col">Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for m in maintenance %}
+              <tr>
+                <td>{{ m.equipment }}</td>
+                <td>{{ m.issue }}</td>
+                <td><span class="badge bg-warning text-dark">{{ m.status }}</span></td>
+              </tr>
+              {% else %}
+              <tr><td colspan="3" class="text-center text-muted">No maintenance items</td></tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

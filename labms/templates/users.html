@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% block title %}Users - SciTech Labs{% endblock %}
+{% block content %}
+<div class="d-flex align-items-center justify-content-between mb-3">
+  <h3 class="mb-0">Users</h3>
+  <a href="#" class="btn btn-primary disabled" aria-disabled="true">Add User</a>
+</div>
+<div class="card">
+  <div class="card-body p-0">
+    <table class="table mb-0 align-middle">
+      <thead>
+        <tr>
+          <th scope="col">Name</th>
+          <th scope="col">Role</th>
+          <th scope="col">Email</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for u in users %}
+        <tr>
+          <td>{{ u.name }}</td>
+          <td>{{ u.role }}</td>
+          <td>{{ u.email }}</td>
+        </tr>
+        {% else %}
+        <tr><td colspan="3" class="text-center text-muted">No users</td></tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  <div class="card-footer text-muted">CRUD coming next</div>
+ </div>
+{% endblock %}
