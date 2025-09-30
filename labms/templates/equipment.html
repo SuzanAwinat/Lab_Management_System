@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% block title %}Equipment - SciTech Labs{% endblock %}
+{% block content %}
+<div class="d-flex align-items-center justify-content-between mb-3">
+  <h3 class="mb-0">Equipment</h3>
+  <a href="#" class="btn btn-primary disabled" aria-disabled="true">Add Equipment</a>
+</div>
+<div class="card">
+  <div class="card-body p-0">
+    <table class="table mb-0 align-middle">
+      <thead>
+        <tr>
+          <th scope="col">Name</th>
+          <th scope="col">Lab</th>
+          <th scope="col">Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for e in equipment %}
+        <tr>
+          <td>{{ e.name }}</td>
+          <td>{{ e.lab }}</td>
+          <td>
+            {% if e.status == 'Available' %}
+              <span class="badge bg-success">{{ e.status }}</span>
+            {% elif e.status == 'In Use' %}
+              <span class="badge bg-warning text-dark">{{ e.status }}</span>
+            {% else %}
+              <span class="badge bg-secondary">{{ e.status }}</span>
+            {% endif %}
+          </td>
+        </tr>
+        {% else %}
+        <tr><td colspan="3" class="text-center text-muted">No equipment</td></tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  <div class="card-footer text-muted">CRUD coming next</div>
+ </div>
+{% endblock %}

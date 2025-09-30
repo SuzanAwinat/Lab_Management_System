@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block title %}Bookings - SciTech Labs{% endblock %}
+{% block content %}
+<div class="d-flex align-items-center justify-content-between mb-3">
+  <h3 class="mb-0">Bookings</h3>
+  <a href="#" class="btn btn-primary disabled" aria-disabled="true">New Booking</a>
+</div>
+<div class="card">
+  <div class="card-body p-0">
+    <table class="table mb-0 align-middle">
+      <thead>
+        <tr>
+          <th scope="col">Lab</th>
+          <th scope="col">Date</th>
+          <th scope="col">Time</th>
+          <th scope="col">By</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for b in bookings %}
+        <tr>
+          <td>{{ b.lab }}</td>
+          <td>{{ b.date }}</td>
+          <td>{{ b.time }}</td>
+          <td>{{ b.by }}</td>
+        </tr>
+        {% else %}
+        <tr><td colspan="4" class="text-center text-muted">No bookings</td></tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  <div class="card-footer text-muted">Booking workflow coming next</div>
+ </div>
+{% endblock %}

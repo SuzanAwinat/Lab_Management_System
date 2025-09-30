@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% block title %}Maintenance - SciTech Labs{% endblock %}
+{% block content %}
+<div class="d-flex align-items-center justify-content-between mb-3">
+  <h3 class="mb-0">Maintenance</h3>
+  <a href="#" class="btn btn-primary disabled" aria-disabled="true">New Ticket</a>
+</div>
+<div class="card">
+  <div class="card-body p-0">
+    <table class="table mb-0 align-middle">
+      <thead>
+        <tr>
+          <th scope="col">Equipment</th>
+          <th scope="col">Issue</th>
+          <th scope="col">Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for m in maintenance %}
+        <tr>
+          <td>{{ m.equipment }}</td>
+          <td>{{ m.issue }}</td>
+          <td>{{ m.status }}</td>
+        </tr>
+        {% else %}
+        <tr><td colspan="3" class="text-center text-muted">No tickets</td></tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  <div class="card-footer text-muted">Ticket workflow coming next</div>
+ </div>
+{% endblock %}

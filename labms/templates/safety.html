@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% block title %}Safety - SciTech Labs{% endblock %}
+{% block content %}
+<div class="d-flex align-items-center justify-content-between mb-3">
+  <h3 class="mb-0">Safety</h3>
+  <a href="#" class="btn btn-primary disabled" aria-disabled="true">Add Safety Item</a>
+</div>
+<div class="card">
+  <div class="card-body p-0">
+    <table class="table mb-0 align-middle">
+      <thead>
+        <tr>
+          <th scope="col">Item</th>
+          <th scope="col">Lab</th>
+          <th scope="col">Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for s in safety %}
+        <tr>
+          <td>{{ s.item }}</td>
+          <td>{{ s.lab }}</td>
+          <td>{{ s.status }}</td>
+        </tr>
+        {% else %}
+        <tr><td colspan="3" class="text-center text-muted">No safety items</td></tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  <div class="card-footer text-muted">CRUD coming next</div>
+ </div>
+{% endblock %}

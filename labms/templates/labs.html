@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% block title %}Labs - SciTech Labs{% endblock %}
+{% block content %}
+<div class="d-flex align-items-center justify-content-between mb-3">
+  <h3 class="mb-0">Labs</h3>
+  <a href="#" class="btn btn-primary disabled" aria-disabled="true">Add Lab</a>
+</div>
+<div class="card">
+  <div class="card-body p-0">
+    <table class="table mb-0 align-middle">
+      <thead>
+        <tr>
+          <th scope="col">Name</th>
+          <th scope="col">Location</th>
+          <th scope="col">Capacity</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for l in labs %}
+        <tr>
+          <td>{{ l.name }}</td>
+          <td>{{ l.location }}</td>
+          <td>{{ l.capacity }}</td>
+        </tr>
+        {% else %}
+        <tr><td colspan="3" class="text-center text-muted">No labs</td></tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  <div class="card-footer text-muted">CRUD coming next</div>
+ </div>
+{% endblock %}
